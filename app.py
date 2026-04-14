@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit as st
 import pandas as pd
 from datetime import datetime
 
@@ -25,10 +24,11 @@ if st.sidebar.button("🗑️ Reset All & Back to Start"):
     st.rerun()
 
 # --- 2. STYLES ---
-st.markdown("""<style>
+st.markdown("""
+<style>
     .stButton > button {
         width: 100%;
-        border-radius: 8px;
+        border-radius: 10px;
         min-height: 4.5em;
         height: auto;
         background-color: #2E7D32;
@@ -36,8 +36,24 @@ st.markdown("""<style>
         font-weight: bold;
         white-space: normal !important;
         word-wrap: break-word;
-        padding: 0.75rem 1rem;
+        padding: 0.85rem 1rem;
         line-height: 1.3;
+        font-size: 1rem;
+    }
+
+    .main-title {
+        text-align: center;
+        font-size: 2.4rem;
+        font-weight: 800;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #555;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
     }
 
     .gate-box {
@@ -89,34 +105,44 @@ st.markdown("""<style>
         font-weight: bold;
         font-size: 1.1em;
     }
-</style>""", unsafe_allow_html=True)
+</style>
+""", unsafe_allow_html=True)
 
 # --- 3. MAIN MENU / TIER SELECTOR ---
 if st.session_state.menu == "Main":
 
+    # =========================
+    # TIER SELECTOR
+    # =========================
     if st.session_state.selected_tier is None:
-        st.title("🏆 Sales Excellence Assessment Suite")
-        st.subheader("Select a Tier to Assess")
+        st.markdown("<div class='main-title'>🏆 Sales Competency Assessment Suite</div>", unsafe_allow_html=True)
+        st.markdown("<div class='subtitle'>Select a competency tier to begin</div>", unsafe_allow_html=True)
 
-        c1, c2, c3 = st.columns(3)
+        left, center, right = st.columns([1, 8, 1])
 
-        if c1.button("🥇 Tier 1 Competencies", use_container_width=True):
-            st.session_state.selected_tier = "Tier 1"
-            st.rerun()
+        with center:
+            c1, c2, c3 = st.columns(3)
 
-        if c2.button("🥈 Tier 2 Competencies", use_container_width=True):
-            st.session_state.selected_tier = "Tier 2"
-            st.rerun()
+            if c1.button("🥇 Tier 1\nCore Selling Competencies", use_container_width=True):
+                st.session_state.selected_tier = "Tier 1"
+                st.rerun()
 
-        if c3.button("🥉 Tier 3 Competencies", use_container_width=True):
-            st.session_state.selected_tier = "Tier 3"
-            st.rerun()
+            if c2.button("🥈 Tier 2\nAdvanced Selling Competencies", use_container_width=True):
+                st.session_state.selected_tier = "Tier 2"
+                st.rerun()
+
+            if c3.button("🥉 Tier 3\nOperational & Team Competencies", use_container_width=True):
+                st.session_state.selected_tier = "Tier 3"
+                st.rerun()
 
         if st.session_state.all_history:
             st.divider()
             st.subheader("📜 Historical Records")
             st.table(pd.DataFrame(st.session_state.all_history))
 
+    # =========================
+    # TIER 1 MENU
+    # =========================
     elif st.session_state.selected_tier == "Tier 1":
         st.title("🏆 Tier 1 Sales Competencies Assessment Suite")
 
@@ -124,37 +150,40 @@ if st.session_state.menu == "Main":
             st.session_state.selected_tier = None
             st.rerun()
 
-        c1, c2, c3, c4, c5 = st.columns(5)
+        st.markdown("### Select a competency")
 
-        if c1.button("📦 Product Knowledge"):
+        row1 = st.columns(3)
+        row2 = st.columns(2)
+
+        if row1[0].button("📦 Product Knowledge"):
             st.session_state.menu = "Product Knowledge"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c2.button("🤝 Deal Progression, Negotiation & Closing"):
+        if row1[1].button("🤝 Deal Progression, Negotiation & Closing"):
             st.session_state.menu = "Deal"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c3.button("🔍 Prospecting & Lead Management"):
+        if row1[2].button("🔍 Prospecting & Lead Management"):
             st.session_state.menu = "Prospecting"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c4.button("💡 Insight Selling"):
+        if row2[0].button("💡 Insight Selling"):
             st.session_state.menu = "Insight"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c5.button("🧠 Adaptability & Learning Agility"):
+        if row2[1].button("🧠 Adaptability & Learning Agility"):
             st.session_state.menu = "Adaptability"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -166,6 +195,9 @@ if st.session_state.menu == "Main":
             st.subheader("📜 Historical Records")
             st.table(pd.DataFrame(st.session_state.all_history))
 
+    # =========================
+    # TIER 2 MENU
+    # =========================
     elif st.session_state.selected_tier == "Tier 2":
         st.title("🥈 Tier 2 Sales Competencies Assessment Suite")
 
@@ -173,37 +205,40 @@ if st.session_state.menu == "Main":
             st.session_state.selected_tier = None
             st.rerun()
 
-        c1, c2, c3, c4, c5 = st.columns(5)
+        st.markdown("### Select a competency")
 
-        if c1.button("🌍 Market Knowledge"):
+        row1 = st.columns(3)
+        row2 = st.columns(2)
+
+        if row1[0].button("🌍 Market Knowledge"):
             st.session_state.menu = "Market Knowledge"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c2.button("💬 SiteMinder Platform Value Proposition"):
+        if row1[1].button("💬 SiteMinder Platform Value Proposition"):
             st.session_state.menu = "SiteMinder Platform Value Proposition"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c3.button("🎥 Product Demonstration"):
+        if row1[2].button("🎥 Product Demonstration"):
             st.session_state.menu = "Product Demonstration"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c4.button("⏱️ Self-Management & Productivity"):
+        if row2[0].button("⏱️ Self-Management & Productivity"):
             st.session_state.menu = "Self-Management & Productivity"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c5.button("📈 Pipeline & Forecast Management"):
+        if row2[1].button("📈 Pipeline & Forecast Management"):
             st.session_state.menu = "Pipeline & Forecast Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -215,6 +250,9 @@ if st.session_state.menu == "Main":
             st.subheader("📜 Historical Records")
             st.table(pd.DataFrame(st.session_state.all_history))
 
+    # =========================
+    # TIER 3 MENU
+    # =========================
     elif st.session_state.selected_tier == "Tier 3":
         st.title("🥉 Tier 3 Sales Competencies Assessment Suite")
 
@@ -222,37 +260,40 @@ if st.session_state.menu == "Main":
             st.session_state.selected_tier = None
             st.rerun()
 
-        c1, c2, c3, c4, c5 = st.columns(5)
+        st.markdown("### Select a competency")
 
-        if c1.button("🗺️ Market Management"):
+        row1 = st.columns(3)
+        row2 = st.columns(2)
+
+        if row1[0].button("🗺️ Market Management"):
             st.session_state.menu = "Market Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c2.button("🤝 Onboarding & Handover Process"):
+        if row1[1].button("🤝 Onboarding & Handover Process"):
             st.session_state.menu = "Onboarding & Handover Process"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c3.button("🧾 Salesforce Hygiene"):
+        if row1[2].button("🧾 Salesforce Hygiene"):
             st.session_state.menu = "Salesforce Hygiene"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c4.button("⚙️ Technical Quoting & Order Management"):
+        if row2[0].button("⚙️ Technical Quoting & Order Management"):
             st.session_state.menu = "Technical Quoting & Order Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if c5.button("🤝 Teamwork & Collaboration"):
+        if row2[1].button("🤝 Teamwork & Collaboration"):
             st.session_state.menu = "Teamwork & Collaboration"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -263,6 +304,8 @@ if st.session_state.menu == "Main":
             st.divider()
             st.subheader("📜 Historical Records")
             st.table(pd.DataFrame(st.session_state.all_history))
+
+# --- 4. ASSESSMENT FLOW ---
 
 # --- 4. ASSESSMENT FLOW ---
 else:
