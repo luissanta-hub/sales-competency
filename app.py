@@ -28,8 +28,9 @@ st.markdown("""
 <style>
     .stButton > button {
         width: 100%;
+        max-width: 420px;
         border-radius: 10px;
-        min-height: 4.5em;
+        min-height: 4.2em;
         height: auto;
         background-color: #2E7D32;
         color: white;
@@ -39,6 +40,8 @@ st.markdown("""
         padding: 0.85rem 1rem;
         line-height: 1.3;
         font-size: 1rem;
+        text-align: left;
+        justify-content: flex-start;
     }
 
     .main-title {
@@ -146,44 +149,43 @@ if st.session_state.menu == "Main":
     elif st.session_state.selected_tier == "Tier 1":
         st.title("🏆 Tier 1 Sales Competencies Assessment Suite")
 
-        if st.button("⬅️ Back to Tier Selector"):
-            st.session_state.selected_tier = None
-            st.rerun()
+        back_col, _ = st.columns([1, 5])
+        with back_col:
+            if st.button("⬅️ Back to Tier Selector"):
+                st.session_state.selected_tier = None
+                st.rerun()
 
         st.markdown("### Select a competency")
 
-        row1 = st.columns(3)
-        row2 = st.columns(2)
-
-        if row1[0].button("📦 Product Knowledge"):
+        if st.button("📦 Product Knowledge"):
             st.session_state.menu = "Product Knowledge"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[1].button("🤝 Deal Progression, Negotiation & Closing"):
+        if st.button("🤝 Deal Progression, Negotiation & Closing"):
             st.session_state.menu = "Deal"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[2].button("🔍 Prospecting & Lead Management"):
+        if st.button("🔍 Prospecting & Lead Management"):
             st.session_state.menu = "Prospecting"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[0].button("💡 Insight Selling"):
+        if st.button("💡 Insight Selling"):
             st.session_state.menu = "Insight"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[1].button("🧠 Adaptability & Learning Agility"):
+        if st.button("🧠 Adaptability & Learning Agility"):
             st.session_state.menu = "Adaptability"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -201,44 +203,43 @@ if st.session_state.menu == "Main":
     elif st.session_state.selected_tier == "Tier 2":
         st.title("🥈 Tier 2 Sales Competencies Assessment Suite")
 
-        if st.button("⬅️ Back to Tier Selector"):
-            st.session_state.selected_tier = None
-            st.rerun()
+        back_col, _ = st.columns([1, 5])
+        with back_col:
+            if st.button("⬅️ Back to Tier Selector"):
+                st.session_state.selected_tier = None
+                st.rerun()
 
         st.markdown("### Select a competency")
 
-        row1 = st.columns(3)
-        row2 = st.columns(2)
-
-        if row1[0].button("🌍 Market Knowledge"):
+        if st.button("🌍 Market Knowledge"):
             st.session_state.menu = "Market Knowledge"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[1].button("💬 SiteMinder Platform Value Proposition"):
+        if st.button("💬 SiteMinder Platform Value Proposition"):
             st.session_state.menu = "SiteMinder Platform Value Proposition"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[2].button("🎥 Product Demonstration"):
+        if st.button("🎥 Product Demonstration"):
             st.session_state.menu = "Product Demonstration"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[0].button("⏱️ Self-Management & Productivity"):
+        if st.button("⏱️ Self-Management & Productivity"):
             st.session_state.menu = "Self-Management & Productivity"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[1].button("📈 Pipeline & Forecast Management"):
+        if st.button("📈 Pipeline & Forecast Management"):
             st.session_state.menu = "Pipeline & Forecast Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -256,44 +257,43 @@ if st.session_state.menu == "Main":
     elif st.session_state.selected_tier == "Tier 3":
         st.title("🥉 Tier 3 Sales Competencies Assessment Suite")
 
-        if st.button("⬅️ Back to Tier Selector"):
-            st.session_state.selected_tier = None
-            st.rerun()
+        back_col, _ = st.columns([1, 5])
+        with back_col:
+            if st.button("⬅️ Back to Tier Selector"):
+                st.session_state.selected_tier = None
+                st.rerun()
 
         st.markdown("### Select a competency")
 
-        row1 = st.columns(3)
-        row2 = st.columns(2)
-
-        if row1[0].button("🗺️ Market Management"):
+        if st.button("🗺️ Market Management"):
             st.session_state.menu = "Market Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[1].button("🤝 Onboarding & Handover Process"):
+        if st.button("🤝 Onboarding & Handover Process"):
             st.session_state.menu = "Onboarding & Handover Process"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row1[2].button("🧾 Salesforce Hygiene"):
+        if st.button("🧾 Salesforce Hygiene"):
             st.session_state.menu = "Salesforce Hygiene"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[0].button("⚙️ Technical Quoting & Order Management"):
+        if st.button("⚙️ Technical Quoting & Order Management"):
             st.session_state.menu = "Technical Quoting & Order Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
-        if row2[1].button("🤝 Teamwork & Collaboration"):
+        if st.button("🤝 Teamwork & Collaboration"):
             st.session_state.menu = "Teamwork & Collaboration"
             st.session_state.step = 1
             st.session_state.q_count = 1
@@ -304,8 +304,6 @@ if st.session_state.menu == "Main":
             st.divider()
             st.subheader("📜 Historical Records")
             st.table(pd.DataFrame(st.session_state.all_history))
-
-# --- 4. ASSESSMENT FLOW ---
 
 # --- 4. ASSESSMENT FLOW ---
 else:
@@ -1062,7 +1060,6 @@ else:
                     st.markdown('<div class="criteria-box"><span class="criteria-text">2. All deal documentation is submitted correctly within 24 hours of signature.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tq12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="tq12n"): st.session_state.final_level = "L1"; st.rerun()
-
             # ==========================================
             # 🤝 TEAMWORK & COLLABORATION
             # ==========================================
