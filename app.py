@@ -54,7 +54,8 @@ if st.session_state.menu == "Main":
             st.rerun()
 
         if c3.button("🥉 Tier 3 Competencies", use_container_width=True):
-            st.info("Tier 3 will be added later.")
+            st.session_state.selected_tier = "Tier 3"
+            st.rerun()
 
         if st.session_state.all_history:
             st.divider()
@@ -149,6 +150,55 @@ if st.session_state.menu == "Main":
 
         if c5.button("📈 Pipeline & Forecast Management"):
             st.session_state.menu = "Pipeline & Forecast Management"
+            st.session_state.step = 1
+            st.session_state.q_count = 1
+            st.session_state.final_level = None
+            st.rerun()
+
+        if st.session_state.all_history:
+            st.divider()
+            st.subheader("📜 Historical Records")
+            st.table(pd.DataFrame(st.session_state.all_history))
+
+    elif st.session_state.selected_tier == "Tier 3":
+        st.title("🥉 Tier 3 Sales Competencies Assessment Suite")
+
+        if st.button("⬅️ Back to Tier Selector"):
+            st.session_state.selected_tier = None
+            st.rerun()
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+
+        if c1.button("🗺️ Market Management"):
+            st.session_state.menu = "Market Management"
+            st.session_state.step = 1
+            st.session_state.q_count = 1
+            st.session_state.final_level = None
+            st.rerun()
+
+        if c2.button("🤝 Onboarding & Handover Process"):
+            st.session_state.menu = "Onboarding & Handover Process"
+            st.session_state.step = 1
+            st.session_state.q_count = 1
+            st.session_state.final_level = None
+            st.rerun()
+
+        if c3.button("🧾 Salesforce Hygiene"):
+            st.session_state.menu = "Salesforce Hygiene"
+            st.session_state.step = 1
+            st.session_state.q_count = 1
+            st.session_state.final_level = None
+            st.rerun()
+
+        if c4.button("⚙️ Technical Quoting & Order Management"):
+            st.session_state.menu = "Technical Quoting & Order Management"
+            st.session_state.step = 1
+            st.session_state.q_count = 1
+            st.session_state.final_level = None
+            st.rerun()
+
+        if c5.button("🤝 Teamwork & Collaboration"):
+            st.session_state.menu = "Teamwork & Collaboration"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
@@ -703,6 +753,271 @@ else:
                     if st.button("YES ✅", key="pf12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="pf12n"): st.session_state.final_level = "L1"; st.rerun()
 
+            # ==========================================
+            # 🗺️ MARKET MANAGEMENT
+            # ==========================================
+            elif assessment_type == "Market Management":
+                if step == 1:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Has the seller developed and executed a clear market segmentation and targeting strategy AND used data, resources, or partners effectively to drive measurable growth in priority segments?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm1n"): st.session_state.step = 7; st.session_state.q_count += 1; st.rerun()
+                elif step == 2:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Has defined and prioritized market segments using clear criteria, for example revenue potential, product fit, region, or customer profile.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm2y"): st.session_state.step = 3; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm2n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 3:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates measurable business impact from that strategy.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm3y"): st.session_state.step = 4; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm3n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 4:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌟 GATE: L4/L5</span><span class="gate-question">Has the seller created a market management strategy or framework adopted by other team members AND contributed to a significant, measurable increase in pipeline or revenue beyond their own territory?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm4y"): st.session_state.step = 5; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm4n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 5:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Developed a structured approach to market segmentation or targeting that others adopted, for example revenue potential, product fit, region, or customer profile.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm5n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 6:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Their strategy produced measurable team or organizational impact.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm6y"): st.session_state.final_level = "L5"; st.rerun()
+                    if st.button("NO ❌", key="mm6n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 7:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📈 GATE: L2/L3</span><span class="gate-question">Does the seller proactively segment their market AND successfully grow pipeline or revenue within a priority segment through focused engagement?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm7y"): st.session_state.step = 8; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm7n"): st.session_state.step = 10; st.session_state.q_count += 1; st.rerun()
+                elif step == 8:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Uses defined criteria to segment their market.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm8n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 9:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates measurable improvement within a targeted segment.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm9y"): st.session_state.final_level = "L3"; st.rerun()
+                    if st.button("NO ❌", key="mm9n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 10:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌱 GATE: L1/L2</span><span class="gate-question">Can the seller clearly articulate which segments or accounts they are targeting AND are they executing prospecting activities consistently within those targets?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm10y"): st.session_state.step = 11; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm10n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 11:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Can explain target segments or accounts and the rationale behind them.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="mm11n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 12:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates consistent execution against their targets.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="mm12y"): st.session_state.final_level = "L2"; st.rerun()
+                    if st.button("NO ❌", key="mm12n"): st.session_state.final_level = "L1"; st.rerun()
+
+            # ==========================================
+            # 🤝 ONBOARDING & HANDOVER PROCESS
+            # ==========================================
+            elif assessment_type == "Onboarding & Handover Process":
+                if step == 1:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Can the seller successfully troubleshoot handover issues before they escalate AND act as a key liaison ensuring Onboarding has everything for complex accounts?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh1n"): st.session_state.step = 7; st.session_state.q_count += 1; st.rerun()
+                elif step == 2:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Pre-empts 80%+ of potential handover roadblocks.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh2y"): st.session_state.step = 3; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh2n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 3:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Onboarding team views them as a collaborative partner, not a roadblock.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh3y"): st.session_state.step = 4; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh3n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 4:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌟 GATE: L4/L5</span><span class="gate-question">Has the seller pioneered a new process or tool that significantly reduced customer time-to-value AND developed a formal strategy for managing stalled deals?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh4y"): st.session_state.step = 5; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh4n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 5:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Implemented a new internal checklist or tool.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh5n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 6:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a documented playbook for getting stuck deals back on track.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh6y"): st.session_state.final_level = "L5"; st.rerun()
+                    if st.button("NO ❌", key="oh6n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 7:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📈 GATE: L2/L3</span><span class="gate-question">Does the seller proactively prepare the customer for the next steps AND work collaboratively with Onboarding, providing additional, helpful context?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh7y"): st.session_state.step = 8; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh7n"): st.session_state.step = 10; st.session_state.q_count += 1; st.rerun()
+                elif step == 8:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Customer is never surprised by the next stage of the process.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh8n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 9:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Provides extra notes/background to the Onboarding team beyond the checklist.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh9y"): st.session_state.final_level = "L3"; st.rerun()
+                    if st.button("NO ❌", key="oh9n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 10:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌱 GATE: L1/L2</span><span class="gate-question">Does the seller consistently complete the standard handoff checklist AND minimize the need for the Onboarding team to do significant follow-up for missing data?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh10y"): st.session_state.step = 11; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh10n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 11:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. All mandatory fields are completed on time.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="oh11n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 12:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Onboarding team reports minimal time spent chasing them for information.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="oh12y"): st.session_state.final_level = "L2"; st.rerun()
+                    if st.button("NO ❌", key="oh12n"): st.session_state.final_level = "L1"; st.rerun()
+
+            # ==========================================
+            # 🧾 SALESFORCE HYGIENE
+            # ==========================================
+            elif assessment_type == "Salesforce Hygiene":
+                if step == 1:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Is the seller leveraging advanced Salesforce features, custom reports or dashboards, AND acting as a troubleshooter for peer questions?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf1n"): st.session_state.step = 7; st.session_state.q_count += 1; st.rerun()
+                elif step == 2:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Uses advanced reporting to gain personal insights.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf2y"): st.session_state.step = 3; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf2n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 3:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Peers regularly seek them out for SFDC process or data help.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf3y"): st.session_state.step = 4; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf3n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 4:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌟 GATE: L4/L5</span><span class="gate-question">Has the seller partnered with Revenue Operations to enhance the system AND developed a new best practice for hygiene shared across the sales floor?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf4y"): st.session_state.step = 5; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf4n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 5:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Initiated a project with Revenue or CRM Ops to fix a systemic data issue.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf5n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 6:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created and trained peers on a new data entry or workflow shortcut.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf6y"): st.session_state.final_level = "L5"; st.rerun()
+                    if st.button("NO ❌", key="sf6n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 7:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📈 GATE: L2/L3</span><span class="gate-question">Does the seller proactively ensure data integrity without prompting AND use Salesforce as a strategic tool to manage their territory?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf7y"): st.session_state.step = 8; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf7n"): st.session_state.step = 10; st.session_state.q_count += 1; st.rerun()
+                elif step == 8:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Data integrity is audited and found to be 95%+ accurate month-over-month.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf8n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 9:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Uses SFDC reports to identify where to prospect next.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf9y"): st.session_state.final_level = "L3"; st.rerun()
+                    if st.button("NO ❌", key="sf9n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 10:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌱 GATE: L1/L2</span><span class="gate-question">Do they consistently enter accurate and timely data AND do they use basic Salesforce reporting to track their own activity and progress?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf10y"): st.session_state.step = 11; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf10n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 11:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Logs all calls and emails daily.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="sf11n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 12:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can pull a report to show their activity volume and conversion rates.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="sf12y"): st.session_state.final_level = "L2"; st.rerun()
+                    if st.button("NO ❌", key="sf12n"): st.session_state.final_level = "L1"; st.rerun()
+
+            # ==========================================
+            # ⚙️ TECHNICAL QUOTING & ORDER MANAGEMENT
+            # ==========================================
+            elif assessment_type == "Technical Quoting & Order Management":
+                if step == 1:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Has the seller served as the go-to resource for peer technical quoting questions AND proactively streamlined their own process for efficiency?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq1n"): st.session_state.step = 7; st.session_state.q_count += 1; st.rerun()
+                elif step == 2:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Is the authority on complex quoting rules for the team.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq2y"): st.session_state.step = 3; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq2n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 3:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Reduced the time they spend on admin by more than 20% through optimisation.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq3y"): st.session_state.step = 4; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq3n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 4:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌟 GATE: L4/L5</span><span class="gate-question">Has the seller created a new method or training that significantly reduced the team&apos;s administrative burden or error rate AND partnered with Operations or Finance to enhance the technical quoting system?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq4y"): st.session_state.step = 5; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq4n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 5:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Developed a tool or training adopted by the team.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq5n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 6:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Successfully initiated and completed a project with a cross-functional team to improve quoting.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq6y"): st.session_state.final_level = "L5"; st.rerun()
+                    if st.button("NO ❌", key="tq6n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 7:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📈 GATE: L2/L3</span><span class="gate-question">Can the seller handle complex quoting scenarios with efficiency AND do you receive positive feedback from the post-sales team on their order rigor?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq7y"): st.session_state.step = 8; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq7n"): st.session_state.step = 10; st.session_state.q_count += 1; st.rerun()
+                elif step == 8:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Successfully quotes 3+ products, non-standard terms, or regional variances without error.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq8n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 9:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Post-sales team praises their detail and rigor.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq9y"): st.session_state.final_level = "L3"; st.rerun()
+                    if st.button("NO ❌", key="tq9n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 10:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌱 GATE: L1/L2</span><span class="gate-question">Can they independently generate accurate standard quotes with minimal errors AND do they consistently follow standard administrative steps for finalising a deal?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq10y"): st.session_state.step = 11; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq10n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 11:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Error rate is less than 5% on standard deals.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tq11n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 12:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. All deal documentation is submitted correctly within 24 hours of signature.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tq12y"): st.session_state.final_level = "L2"; st.rerun()
+                    if st.button("NO ❌", key="tq12n"): st.session_state.final_level = "L1"; st.rerun()
+
+            # ==========================================
+            # 🤝 TEAMWORK & COLLABORATION
+            # ==========================================
+            elif assessment_type == "Teamwork & Collaboration":
+                if step == 1:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Does the seller frequently mentor and elevate the performance of struggling peers AND have they led a team initiative to improve a sales process?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw1n"): st.session_state.step = 7; st.session_state.q_count += 1; st.rerun()
+                elif step == 2:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Spends dedicated time coaching peers.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw2y"): st.session_state.step = 3; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw2n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 3:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Took ownership of a team project without being assigned by management.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw3y"): st.session_state.step = 4; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw3n"): st.session_state.final_level = "L3"; st.rerun()
+                elif step == 4:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌟 GATE: L4/L5</span><span class="gate-question">Does the seller inspire and motivate the entire team as a key culture carrier AND are they involved in designing team development programs with leadership?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw4y"): st.session_state.step = 5; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw4n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 5:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Their presence and attitude consistently boost morale.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw5n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 6:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Contributes to the formal design of onboarding or training content.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw6y"): st.session_state.final_level = "L5"; st.rerun()
+                    if st.button("NO ❌", key="tw6n"): st.session_state.final_level = "L4"; st.rerun()
+                elif step == 7:
+                    st.markdown('<div class="gate-box"><span class="gate-title">📈 GATE: L2/L3</span><span class="gate-question">Does the seller proactively share an insight or tool that helped a peer AND do they offer to help colleagues with time-intensive tasks without being asked?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw7y"): st.session_state.step = 8; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw7n"): st.session_state.step = 10; st.session_state.q_count += 1; st.rerun()
+                elif step == 8:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Regularly posts useful resources or tips in a team channel.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw8n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 9:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Voluntarily jumps in to assist when a peer is swamped.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw9y"): st.session_state.final_level = "L3"; st.rerun()
+                    if st.button("NO ❌", key="tw9n"): st.session_state.final_level = "L2"; st.rerun()
+                elif step == 10:
+                    st.markdown('<div class="gate-box"><span class="gate-title">🌱 GATE: L1/L2</span><span class="gate-question">Does the seller handle feedback in a mature and open way AND do they contribute to team-wide initiatives when asked?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw10y"): st.session_state.step = 11; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw10n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 11:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">1. Shows a clear willingness to change behavior based on coaching.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
+                    if st.button("NO ❌", key="tw11n"): st.session_state.final_level = "L1"; st.rerun()
+                elif step == 12:
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Participates fully in team meetings and required projects.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
+                    if st.button("YES ✅", key="tw12y"): st.session_state.final_level = "L2"; st.rerun()
+                    if st.button("NO ❌", key="tw12n"): st.session_state.final_level = "L1"; st.rerun()
+        
         # --- 5. FINAL RESULTS PAGE ---
         else:
             st.balloons()
