@@ -26,14 +26,69 @@ if st.sidebar.button("🗑️ Reset All & Back to Start"):
 
 # --- 2. STYLES ---
 st.markdown("""<style>
-    .stButton>button { width: 100%; border-radius: 8px; height: 3.5em; background-color: #2E7D32; color: white; font-weight: bold; }
-    .gate-box { background-color: #000000 !important; padding: 25px; border-radius: 8px; border: 2px solid #555; text-align: center; }
-    .gate-title { color: #ffffff !important; font-weight: bold; font-size: 1.4em; display: block; margin-bottom: 10px; }
-    .gate-question { color: #ffffff !important; font-weight: 800; font-size: 1.6em; }
-    .criteria-box { background-color: #f1f3f5 !important; padding: 20px; border-radius: 10px; border-left: 8px solid #2E7D32; margin-bottom: 20px; }
-    .criteria-text { color: #000000 !important; font-weight: bold; font-size: 1.2em; display: block; margin-bottom: 10px; }
-    .criteria-question { color: #000000 !important; font-weight: 800; font-size: 1.5em; }
-    .question-number { color: #555; font-weight: bold; font-size: 1.1em; }
+    .stButton > button {
+        width: 100%;
+        border-radius: 8px;
+        min-height: 4.5em;
+        height: auto;
+        background-color: #2E7D32;
+        color: white;
+        font-weight: bold;
+        white-space: normal !important;
+        word-wrap: break-word;
+        padding: 0.75rem 1rem;
+        line-height: 1.3;
+    }
+
+    .gate-box {
+        background-color: #000000 !important;
+        padding: 25px;
+        border-radius: 8px;
+        border: 2px solid #555;
+        text-align: center;
+    }
+
+    .gate-title {
+        color: #ffffff !important;
+        font-weight: bold;
+        font-size: 1.4em;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .gate-question {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 1.6em;
+    }
+
+    .criteria-box {
+        background-color: #f1f3f5 !important;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 8px solid #2E7D32;
+        margin-bottom: 20px;
+    }
+
+    .criteria-text {
+        color: #000000 !important;
+        font-weight: bold;
+        font-size: 1.2em;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .criteria-question {
+        color: #000000 !important;
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+
+    .question-number {
+        color: #555;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
 </style>""", unsafe_allow_html=True)
 
 # --- 3. MAIN MENU / TIER SELECTOR ---
