@@ -1,4 +1,6 @@
 import streamlit as st
+
+import streamlit as st
 import pandas as pd
 from datetime import datetime
 
@@ -17,6 +19,12 @@ if "q_count" not in st.session_state:
     st.session_state.q_count = 1
 if "final_level" not in st.session_state:
     st.session_state.final_level = None
+if "evaluator_name" not in st.session_state:
+    st.session_state.evaluator_name = ""
+if "rep_name" not in st.session_state:
+    st.session_state.rep_name = ""
+if "setup_complete" not in st.session_state:
+    st.session_state.setup_complete = False
 
 # Sidebar Reset
 if st.sidebar.button("🗑️ Reset All & Back to Start"):
@@ -111,6 +119,45 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# --- 3. SETUP SCREEN ---
+if not st.session_state.setup_complete:
+    st.markdown("<div class='main-title'>🏆 Sales Competency Assessment Suite</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>Enter the evaluator and representative to begin</div>", unsafe_allow_html=True)
+
+    left, center, right = st.columns([1, 2, 1])
+
+    with center:
+        evaluator_input = st.text_input(
+            "Evaluator Name",
+            value=st.session_state.evaluator_name
+        )
+
+        rep_input = st.text_input(
+            "Representative Name",
+            value=st.session_state.rep_name
+        )
+
+        if st.button("Begin Assessment", use_container_width=True):
+            if evaluator_input.strip() and rep_input.strip():
+                st.session_state.evaluator_name = evaluator_input.strip()
+                st.session_state.rep_name = rep_input.strip()
+                st.session_state.setup_complete = True
+                st.session_state.selected_tier = None
+                st.session_state.menu = "Main"
+                st.session_state.step = 1
+                st.session_state.q_count = 1
+                st.session_state.final_level = None
+                st.rerun()
+            else:
+                st.warning("Please enter both Evaluator Name and Representative Name.")
+
+    if st.session_state.all_history:
+        st.divider()
+        st.subheader("📜 Historical Records")
+        st.table(pd.DataFrame(st.session_state.all_history))
+
+    st.stop()
+
 # --- 3. MAIN MENU / TIER SELECTOR ---
 if st.session_state.menu == "Main":
 
@@ -120,6 +167,7 @@ if st.session_state.menu == "Main":
     if st.session_state.selected_tier is None:
         st.markdown("<div class='main-title'>🏆 Sales Competency Assessment Suite</div>", unsafe_allow_html=True)
         st.markdown("<div class='subtitle'>Select a competency tier to begin</div>", unsafe_allow_html=True)
+        st.info(f"Evaluator: {st.session_state.evaluator_name} | Representative: {st.session_state.rep_name}")
 
         left, center, right = st.columns([1, 8, 1])
 
@@ -148,6 +196,7 @@ if st.session_state.menu == "Main":
     # =========================
     elif st.session_state.selected_tier == "Tier 1":
         st.title("🏆 Tier 1 Sales Competencies Assessment Suite")
+        st.info(f"Evaluator: {st.session_state.evaluator_name} | Representative: {st.session_state.rep_name}")
 
         back_col, _ = st.columns([1, 5])
         with back_col:
@@ -202,6 +251,7 @@ if st.session_state.menu == "Main":
     # =========================
     elif st.session_state.selected_tier == "Tier 2":
         st.title("🥈 Tier 2 Sales Competencies Assessment Suite")
+        st.info(f"Evaluator: {st.session_state.evaluator_name} | Representative: {st.session_state.rep_name}")
 
         back_col, _ = st.columns([1, 5])
         with back_col:
@@ -256,6 +306,7 @@ if st.session_state.menu == "Main":
     # =========================
     elif st.session_state.selected_tier == "Tier 3":
         st.title("🥉 Tier 3 Sales Competencies Assessment Suite")
+        st.info(f"Evaluator: {st.session_state.evaluator_name} | Representative: {st.session_state.rep_name}")
 
         back_col, _ = st.columns([1, 5])
         with back_col:
@@ -309,9 +360,11 @@ if st.session_state.menu == "Main":
 else:
     assessment_type = st.session_state.menu
     st.title(f"🎯 {assessment_type} Assessment")
-    c1, c2 = st.columns(2)
-    rep_name = c1.text_input("Representative Name:")
-    manager_name = c2.text_input("Manager Name:")
+
+    rep_name = st.session_state.rep_name
+    manager_name = st.session_state.evaluator_name
+
+    st.info(f"Evaluator: {manager_name} | Representative: {rep_name}")
 
     if rep_name and manager_name:
         if st.session_state.final_level is None:
@@ -1113,16 +1166,16 @@ else:
                     if st.button("YES ✅", key="tw12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="tw12n"): st.session_state.final_level = "L1"; st.rerun()
         
-        # --- 5. FINAL RESULTS PAGE ---
+                # --- 5. FINAL RESULTS PAGE ---
         else:
             st.balloons()
             st.success("### 🏁 Assessment Complete!")
 
             new_record = {
                 "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M"),
+                "Evaluator": st.session_state.evaluator_name,
+                "Representative": st.session_state.rep_name,
                 "Tier": st.session_state.selected_tier,
-                "Representative": rep_name,
-                "Manager": manager_name,
                 "Competency": assessment_type,
                 "Level": st.session_state.final_level
             }
@@ -1136,9 +1189,35 @@ else:
 
             st.divider()
 
-            if st.button("💾 Save Result & Return to Main Menu", use_container_width=True):
-                st.session_state.step = 1
-                st.session_state.q_count = 1
-                st.session_state.final_level = None
-                st.session_state.menu = "Main"
-                st.rerun()
+            c1, c2, c3 = st.columns(3)
+
+            with c1:
+                if st.button("↩️ Back to Competency Selector", use_container_width=True):
+                    st.session_state.step = 1
+                    st.session_state.q_count = 1
+                    st.session_state.final_level = None
+                    st.session_state.menu = "Main"
+                    st.rerun()
+
+            with c2:
+                if st.button("👤 Assess New Rep", use_container_width=True):
+                    st.session_state.rep_name = ""
+                    st.session_state.setup_complete = False
+                    st.session_state.selected_tier = None
+                    st.session_state.menu = "Main"
+                    st.session_state.step = 1
+                    st.session_state.q_count = 1
+                    st.session_state.final_level = None
+                    st.rerun()
+
+            with c3:
+                if st.button("🏠 Back to Home", use_container_width=True):
+                    st.session_state.evaluator_name = ""
+                    st.session_state.rep_name = ""
+                    st.session_state.setup_complete = False
+                    st.session_state.selected_tier = None
+                    st.session_state.menu = "Main"
+                    st.session_state.step = 1
+                    st.session_state.q_count = 1
+                    st.session_state.final_level = None
+                    st.rerun()
