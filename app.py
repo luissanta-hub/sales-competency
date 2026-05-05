@@ -1,6 +1,4 @@
 import streamlit as st
-
-import streamlit as st
 import pandas as pd
 from datetime import datetime
 
@@ -153,8 +151,25 @@ if not st.session_state.setup_complete:
 
     if st.session_state.all_history:
         st.divider()
+
+        history_df = pd.DataFrame(st.session_state.all_history)
+
+        st.subheader("📥 Export Assessment Data")
+
+        csv = history_df.to_csv(index=False).encode("utf-8")
+
+        st.download_button(
+            label="⬇️ Download CSV",
+            data=csv,
+            file_name="sales_assessments.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
+
+        st.divider()
+
         st.subheader("📜 Historical Records")
-        st.table(pd.DataFrame(st.session_state.all_history))
+        st.table(history_df)
 
     st.stop()
 
@@ -397,7 +412,7 @@ else:
                     if st.button("YES ✅", key="pk5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pk5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Acts as team´s lead trainer on competitive product strategy.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Acts as team´s lead trainer on competitive product strategy.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pk6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="pk6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -421,7 +436,7 @@ else:
                     if st.button("YES ✅", key="pk11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pk11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Clearly defines the purpose of core products (e.g., Channel Manager).</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Clearly defines the purpose of core products (e.g., Channel Manager).</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pk12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="pk12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -450,7 +465,7 @@ else:
                     if st.button("YES ✅", key="d5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="d5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text"> 2. Provided data-backed recommendations on improving pricing/terms strategy.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text"> 2. Provided data-backed recommendations on improving pricing/terms strategy.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="d6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="d6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -474,7 +489,7 @@ else:
                     if st.button("YES ✅", key="d11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="d11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can neutralize "too expensive" or "send me an email" without escalation.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can neutralize "too expensive" or "send me an email" without escalation.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="d12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="d12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -503,7 +518,7 @@ else:
                     if st.button("YES ✅", key="pr5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pr5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Forecasts the success of new channels based on market intelligence.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Forecasts the success of new channels based on market intelligence.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pr6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="pr6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -527,7 +542,7 @@ else:
                     if st.button("YES ✅", key="pr11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pr11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Never lets inbound leads go cold due to follow-up delay.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Never lets inbound leads go cold due to follow-up delay.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pr12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="pr12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -556,7 +571,7 @@ else:
                     if st.button("YES ✅", key="i5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="i5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a solution involving 3+ SiteMinder products/integrations based on discovery.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a solution involving 3+ SiteMinder products/integrations based on discovery.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="i6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="i6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -580,7 +595,7 @@ else:
                     if st.button("YES ✅", key="i11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="i11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Accurately links a stated problem (e.g., manual updates) to a core product (e.g., Channel Manager)</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Accurately links a stated problem (e.g., manual updates) to a core product (e.g., Channel Manager)</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="i12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="i12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -609,7 +624,7 @@ else:
                     if st.button("YES ✅", key="a5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="a5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Provides input to management on what skills the team should prioritize next.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Provides input to management on what skills the team should prioritize next.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="a6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="a6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -633,7 +648,7 @@ else:
                     if st.button("YES ✅", key="a11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="a11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2 Can be observed using a new selling technique or showcasing new products  immediately after training.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2 Can be observed using a new selling technique or showcasing new products  immediately after training.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="a12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="a12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -662,7 +677,7 @@ else:
                     if st.button("YES ✅", key="m5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="m5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Presents strategic market reviews to management/leadership.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Presents strategic market reviews to management/leadership.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="m6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="m6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -674,7 +689,7 @@ else:
                     if st.button("YES ✅", key="m8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="m8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Customer explicitly trusts their perspective over competitors.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Customer explicitly trusts their perspective over competitors.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="m9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="m9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -686,7 +701,7 @@ else:
                     if st.button("YES ✅", key="m11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="m11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Effectively uses recent industry news to start a new discussion.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Effectively uses recent industry news to start a new discussion.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="m12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="m12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -715,7 +730,7 @@ else:
                     if st.button("YES ✅", key="v5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="v5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a new, high-impact value framework (e.g., cost of inaction).</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a new, high-impact value framework (e.g., cost of inaction).</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="v6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="v6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -727,7 +742,7 @@ else:
                     if st.button("YES ✅", key="v8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="v8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. The entire sales process revolves around one core value proposition.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. The entire sales process revolves around one core value proposition.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="v9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="v9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -739,7 +754,7 @@ else:
                     if st.button("YES ✅", key="v11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="v11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown("<div class='criteria-box'><span class='criteria-text'>2. Defines what a \"tangible financial value\" means in a sales context.</span><span class='criteria-question'>Meet?</span></div>", unsafe_allow_html=True)
+                    st.markdown("<div class='criteria-box'><span class='criteria-text'>2. Defines what a \"tangible financial value\" means in a sales context.</span><span class='criteria-question'>Meet final?</span></div>", unsafe_allow_html=True)
                     if st.button("YES ✅", key="v12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="v12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -768,7 +783,7 @@ else:
                     if st.button("YES ✅", key="pd5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pd5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Successfully demonstrated the data and reporting features of the platform.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Successfully demonstrated the data and reporting features of the platform.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pd6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="pd6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -780,7 +795,7 @@ else:
                     if st.button("YES ✅", key="pd8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pd8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Customer visibly reacts positively to the solution shown.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Customer visibly reacts positively to the solution shown.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pd9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="pd9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -792,7 +807,7 @@ else:
                     if st.button("YES ✅", key="pd11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pd11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Maintains professional composure during Q&A and technical hiccups.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Maintains professional composure during Q&A and technical hiccups.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pd12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="pd12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -821,7 +836,7 @@ else:
                     if st.button("YES ✅", key="sp5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sp5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Identifies and helps solve process inefficiencies that affect multiple departments.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Identifies and helps solve process inefficiencies that affect multiple departments.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sp6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="sp6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -833,7 +848,7 @@ else:
                     if st.button("YES ✅", key="sp8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sp8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Requires minimal oversight to meet goals and manage their schedule.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Requires minimal oversight to meet goals and manage their schedule.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sp9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="sp9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -845,7 +860,7 @@ else:
                     if st.button("YES ✅", key="sp11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sp11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Majority of time is spent on selling/prospecting activities.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Majority of time is spent on selling/prospecting activities.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sp12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="sp12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -874,7 +889,7 @@ else:
                     if st.button("YES ✅", key="pf5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pf5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Their word on pipeline health is trusted by management above all else.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Their word on pipeline health is trusted by management above all else.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pf6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="pf6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -886,7 +901,7 @@ else:
                     if st.button("YES ✅", key="pf8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pf8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can articulate the health of their pipeline using conversion rates and activity data.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can articulate the health of their pipeline using conversion rates and activity data.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pf9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="pf9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -898,7 +913,7 @@ else:
                     if st.button("YES ✅", key="pf11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="pf11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Forecast is typically within 15-20% of actual results.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Forecast is typically within 15-20% of actual results.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pf12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="pf12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -927,7 +942,7 @@ else:
                     if st.button("YES ✅", key="mm5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="mm5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Their strategy produced measurable team or organizational impact.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Their strategy produced measurable team or organizational impact.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="mm6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="mm6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -939,7 +954,7 @@ else:
                     if st.button("YES ✅", key="mm8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="mm8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates measurable improvement within a targeted segment.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates measurable improvement within a targeted segment.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="mm9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="mm9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -951,7 +966,7 @@ else:
                     if st.button("YES ✅", key="mm11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="mm11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates consistent execution against their targets.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Demonstrates consistent execution against their targets.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="mm12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="mm12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -980,7 +995,7 @@ else:
                     if st.button("YES ✅", key="oh5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="oh5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a documented playbook for getting stuck deals back on track.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created a documented playbook for getting stuck deals back on track.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="oh6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="oh6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -992,7 +1007,7 @@ else:
                     if st.button("YES ✅", key="oh8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="oh8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Provides extra notes/background to the Onboarding team beyond the checklist.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Provides extra notes/background to the Onboarding team beyond the checklist.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="oh9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="oh9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -1004,7 +1019,7 @@ else:
                     if st.button("YES ✅", key="oh11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="oh11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Onboarding team reports minimal time spent chasing them for information.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Onboarding team reports minimal time spent chasing them for information.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="oh12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="oh12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -1033,7 +1048,7 @@ else:
                     if st.button("YES ✅", key="sf5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sf5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created and trained peers on a new data entry or workflow shortcut.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Created and trained peers on a new data entry or workflow shortcut.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sf6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="sf6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -1045,7 +1060,7 @@ else:
                     if st.button("YES ✅", key="sf8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sf8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Uses SFDC reports to identify where to prospect next.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Uses SFDC reports to identify where to prospect next.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sf9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="sf9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -1057,7 +1072,7 @@ else:
                     if st.button("YES ✅", key="sf11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="sf11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can pull a report to show their activity volume and conversion rates.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Can pull a report to show their activity volume and conversion rates.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="sf12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="sf12n"): st.session_state.final_level = "L1"; st.rerun()
 
@@ -1086,7 +1101,7 @@ else:
                     if st.button("YES ✅", key="tq5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tq5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Successfully initiated and completed a project with a cross-functional team to improve quoting.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Successfully initiated and completed a project with a cross-functional team to improve quoting.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tq6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="tq6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -1098,7 +1113,7 @@ else:
                     if st.button("YES ✅", key="tq8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tq8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Post-sales team praises their detail and rigor.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Post-sales team praises their detail and rigor.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tq9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="tq9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -1110,7 +1125,7 @@ else:
                     if st.button("YES ✅", key="tq11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tq11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. All deal documentation is submitted correctly within 24 hours of signature.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. All deal documentation is submitted correctly within 24 hours of signature.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tq12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="tq12n"): st.session_state.final_level = "L1"; st.rerun()
             # ==========================================
@@ -1138,7 +1153,7 @@ else:
                     if st.button("YES ✅", key="tw5y"): st.session_state.step = 6; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tw5n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 6:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Contributes to the formal design of onboarding or training content.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Contributes to the formal design of onboarding or training content.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tw6y"): st.session_state.final_level = "L5"; st.rerun()
                     if st.button("NO ❌", key="tw6n"): st.session_state.final_level = "L4"; st.rerun()
                 elif step == 7:
@@ -1150,7 +1165,7 @@ else:
                     if st.button("YES ✅", key="tw8y"): st.session_state.step = 9; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tw8n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 9:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Voluntarily jumps in to assist when a peer is swamped.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Voluntarily jumps in to assist when a peer is swamped.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tw9y"): st.session_state.final_level = "L3"; st.rerun()
                     if st.button("NO ❌", key="tw9n"): st.session_state.final_level = "L2"; st.rerun()
                 elif step == 10:
@@ -1162,7 +1177,7 @@ else:
                     if st.button("YES ✅", key="tw11y"): st.session_state.step = 12; st.session_state.q_count += 1; st.rerun()
                     if st.button("NO ❌", key="tw11n"): st.session_state.final_level = "L1"; st.rerun()
                 elif step == 12:
-                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Participates fully in team meetings and required projects.</span><span class="criteria-question">Meet?</span></div>', unsafe_allow_html=True)
+                    st.markdown('<div class="criteria-box"><span class="criteria-text">2. Participates fully in team meetings and required projects.</span><span class="criteria-question">Meet final?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="tw12y"): st.session_state.final_level = "L2"; st.rerun()
                     if st.button("NO ❌", key="tw12n"): st.session_state.final_level = "L1"; st.rerun()
         
@@ -1188,7 +1203,7 @@ else:
                 st.session_state.all_history.append(new_record)
 
             st.divider()
-
+            
             c1, c2, c3 = st.columns(3)
 
             with c1:
@@ -1221,4 +1236,3 @@ else:
                     st.session_state.q_count = 1
                     st.session_state.final_level = None
                     st.rerun()
-
