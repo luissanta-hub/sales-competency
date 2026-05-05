@@ -229,28 +229,28 @@ if st.session_state.menu == "Main":
             st.rerun()
 
         if st.button("🤝 Deal Progression, Negotiation & Closing"):
-            st.session_state.menu = "Deal"
+            st.session_state.menu = "Deal Progression, Negotiation & Closing"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
         if st.button("🔍 Prospecting & Lead Management"):
-            st.session_state.menu = "Prospecting"
+            st.session_state.menu = "Prospecting & Lead Management"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
         if st.button("💡 Insight Selling"):
-            st.session_state.menu = "Insight"
+            st.session_state.menu = "Insight Selling"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
             st.rerun()
 
         if st.button("🧠 Adaptability & Learning Agility"):
-            st.session_state.menu = "Adaptability"
+            st.session_state.menu = "Adaptability & Learning Agility"
             st.session_state.step = 1
             st.session_state.q_count = 1
             st.session_state.final_level = None
@@ -443,7 +443,7 @@ else:
             # ==========================================
             # 🤝 DEAL PROGRESSION & NEGOTIATION
             # ==========================================
-            elif assessment_type == "Deal":
+            elif assessment_type == "Deal Progression, Negotiation & Closing":
                 if step == 1:
                     st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Has the seller successfully traded a discount for a valuable concession AND proactively pre-empted the top competitive objections in the middle of the sales cycle?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="d1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
@@ -496,7 +496,7 @@ else:
             # ==========================================
             # 🔍 PROSPECTING & LEAD MANAGEMENT
             # ==========================================
-            elif assessment_type == "Prospecting":
+            elif assessment_type == "Prospecting & Lead Management":
                 if step == 1:
                     st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Do they efficiently manage MQLs AND does their pipeline come primarily from proactive outbound prospecting  that includes discovering new, viable segments?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="pr1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
@@ -549,7 +549,7 @@ else:
             # ==========================================
             # 💡 INSIGHT SELLING
             # ==========================================
-            elif assessment_type == "Insight":
+            elif assessment_type == "Insight Selling":
                 if step == 1:
                     st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Has the seller successfully used third-party information/insight/data to highlight an unforeseen problem AND used their product knowledge to pivot the discovery to that new pain point?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="i1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
@@ -602,7 +602,7 @@ else:
             # ==========================================
             # 🧠 ADAPTABILITY & LEARNING AGILITY
             # ==========================================
-            elif assessment_type == "Adaptability":
+            elif assessment_type == "Adaptability & Learning Agility":
                 if step == 1:
                     st.markdown('<div class="gate-box"><span class="gate-title">📊 GATE: L3/L4</span><span class="gate-question">Has the seller acted as a catalyst for change helping peers adopt new tools, AND do they proactively develop skills to meet future needs?</span></div>', unsafe_allow_html=True)
                     if st.button("YES ✅", key="a1y"): st.session_state.step = 2; st.session_state.q_count += 1; st.rerun()
